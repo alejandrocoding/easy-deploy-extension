@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng build --watch",
+    "serve": "ng serve",
+    "build": "ng build --c=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,12 +25,14 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^9.1.0",
     "@angular-devkit/build-angular": "~0.901.6",
     "@angular/cli": "~9.1.6",
     "@angular/compiler-cli": "~9.1.7",
-    "@types/node": "^12.11.1",
+    "@types/chrome": "0.0.114",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -41,6 +44,7 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "webpack-extension-reloader": "^1.1.4"
   }
 }

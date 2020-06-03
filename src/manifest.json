@@ -1,0 +1,19 @@
+{
+  "name": "Easy Deploy",
+  "version": "1.0",
+  "description": "Easy Deploy in GitHub",
+  "manifest_version": 2,
+  "permissions": ["activeTab", "webNavigation", "tabs", "storage"],
+  "background": {
+    "scripts": ["background.js", "runtime.js"]
+  },
+  "page_action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.github.com/*"],
+      "js": ["contentScript.js", "runtime.js"]
+    }
+  ]
+}

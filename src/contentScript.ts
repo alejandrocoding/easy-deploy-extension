@@ -1,0 +1,1 @@
+console.log('...EASY DEPLOY EXTENSION IS RUNNING...');

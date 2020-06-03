@@ -15,9 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/easy-deploy",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,12 +25,16 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack-dev.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -48,6 +52,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "customWebpackConfig": {
+                "path": "./custom-webpack.config.js"
+              },
               "budgets": [
                 {
                   "type": "initial",
