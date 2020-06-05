@@ -1,0 +1,24 @@
+.wrapper {
+  min-width: 420px;
+  min-height: 120px;
+  .tab-content {
+    margin: 25px;
+    margin-bottom: 10px;
+    min-height: 120px;
+  }
+  .token-box {
+    margin: 25px;
+  }
+}
+
+.add-tab-btn {
+  position: absolute;
+  right: 0;
+  margin-top: 26px;
+  margin-right: 5px;
+  z-index: 100;
+}
+
+.delete-tab-btn {
+  margin: 15px;
+}

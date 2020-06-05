@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+    <h1 fxFlex class="title">EASY DEPLOY</h1>
+</mat-toolbar>
+
+<button class="add-tab-btn" mat-mini-fab color="accent" (click)="addEnv()">
+    <mat-icon>add</mat-icon>
+</button>
+
+<form [formGroup]="form" class="wrapper">
+    <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+        <mat-tab *ngFor="let env of envs.controls; index as i" [formGroup]="env" [label]="env.value.name">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between" class="tab-content">
+                <mat-form-field fxFlex="100" appearance="outline" floatLabel="always">
+                    <mat-label>Environment Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Environment Name">
+                </mat-form-field>
+                <mat-form-field fxFlex="100" appearance="outline" floatLabel="always">
+                    <mat-label>Environment Description</mat-label>
+                    <input matInput formControlName="description" placeholder="Environment Description">
+                </mat-form-field>
+                <mat-form-field fxFlex="45" appearance="outline" floatLabel="always">
+                    <mat-label>:owner/:repo</mat-label>
+                    <input matInput formControlName="repo" placeholder="i.e: microsoft/typescript">
+                </mat-form-field>
+                <mat-form-field fxFlex="45" appearance="outline" floatLabel="always">
+                    <mat-label>Event Type</mat-label>
+                    <input matInput formControlName="event" placeholder="Event type GitHub Action">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="end" class="delete-tab-btn">
+                <button mat-stroked-button color="warn" [disabled]="envs.controls.length === 0" (click)="removeEnv(i)">
+                    DELETE
+                </button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div>
+        <mat-divider></mat-divider>
+        <div fxLayout="column wrap" class="token-box">
+            <mat-form-field fxFlexFill appearance="outline" floatLabel="always">
+                <mat-label>Access Token</mat-label>
+                <input type="password" matInput formControlName="token" placeholder="Access Token">
+            </mat-form-field>
+        </div>
+    </div>
+</form>
