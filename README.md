@@ -14,6 +14,36 @@
 
 This is a chrome extension that allows you to manually trigger a GitHub Action.
 
+Deploy your code into the selected environment from your repository by a button rigth from the GitHub UI.
+
+Configure your environments providing minimal information and trigger a github action which can deploy your code into different environments. From a branch, tag or commit.
+
+_Screenshots:_
+
+![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn.png)
+
+![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn-dropdown.png)
+
+![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn-dropdown-commit.png)
+
+![Deploy Button Injected in GitHub UI](./screenshots/env-config-popup.png)
+
+
+# Steps to use the extension
+
+1. Download from store (TODO: Insert link here)
+2. Go to some GitHub page since the popup only shows up under github domain
+3. Click on the extension to see a popup. Add the desired environments (Name, Description, Owner/Repo, Event Type, Token):
+    - Name: Name displayed in the dropdown of the "Deploy" button
+    - Description: Short information shown below the name in the dropdown of the "Deploy" button
+    - Owner/Repo: Owner of the repository followed by the repository name
+    - Event Type: This value can be taken in the GitHub action to differentiate between environments: _${{ github.event.client_payload.event_type }}_
+    - Token: Personal token needed to dispatch actions on repositories. [Create one here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) - it requires permission for repo (the one which groups a few, first in the list)
+4. You might need to refresh the tab after changing values in the popup. You now will see the deploy button in the configured repository.
+5. Create a GitHub Action to trigger when pressing the deploy button. (TODO: Example will be provided here soon).
+6. Press the deploy button, and see how the action triggers automatically.
+
+
 ### How to run locally
 
 1. Clone this repository and install dependencies using `npm install` inside the cloned folder
@@ -28,7 +58,12 @@ This is a chrome extension that allows you to manually trigger a GitHub Action.
 5. Select the `dist/` folder
 6. Open GitHub.com page and navigate to your repository, click on the extension to see the popup working
 
-Note: Keep in mind when developing locally, neither `background.ts` nor `contentScript.ts` are being updated dynamically. You have to manually update the extension content from the Chrome extension's page.
+Note: Keep in mind when developing locally, `background.ts` and `contentScript.ts` are being updated dynamically. However, sometimes you might need to manually update the extension content from the Chrome extension's page.
+
+
+###  Getting started with chrome extension development
+
+[This post](https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575) guides you through the process of getting started with Chrome Extensions Development. I based my template from the code in [this repository](https://github.com/just-jeb/angular-chrome-extension)
 
 
 ### Contributions [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ialex90/easy-deploy/issues)
