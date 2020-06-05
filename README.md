@@ -1,27 +1,39 @@
-# EasyDeploy
+<a href="https://github.com/ialex90/easy-deploy-extension/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/ialex90/easy-deploy-extension.svg"/>
+  </a>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+  <a href="https://twitter.com/manekinekko">
+    <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg"/>
+  </a>
+  
+<a href="https://angular.io">
+  <img src="https://img.shields.io/badge/Made%20with-Angular-E13137.svg"/>
+</a>
 
-## Development server
+# Easy Deploy - Chrome Extension
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is a chrome extension... WIP
 
-## Code scaffolding
+### How to run locally
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone repo and install dependencies
+2. Run the server `npm start` _(watch mode enabled)_
+3. Open a new chrome tab with the following URL: <chrome://extensions/>
+4. Enable developer mode and click LOAD UNPACKED
 
-## Build
+  ![Screenshot from documentation](https://developer.chrome.com/static/images/get_started/load_extension.png "Screenshot from documentation")
+  
+  [Chrome documentation and image source](https://developer.chrome.com/extensions/getstarted#manifest)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+5. Select the dist folder
+6. Go to GitHub page, refresh and click on the extension to see the popup working
 
-## Running unit tests
+Note: Keep in mind when developing in local, either background.ts & contentScript.ts files are being updated dinamically
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Contributions [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ialex90/easy-deploy/issues)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+You are welcome to contribute to this project.
+All suggestions/fixes/help are more than welcome. Add your feedback to [this todo list](https://github.com/ialex90/easy-deploy-extension/issues/1) for feature requests
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Please contact me ([@alora90](https://twitter.com/alora90)) if you need some help getting started with the setup
