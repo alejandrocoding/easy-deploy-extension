@@ -20,13 +20,22 @@ Configure your environments providing minimal information and trigger a github a
 
 _Screenshots:_
 
-![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn.png)
+<figure>
+  <img title="Deploy Button Injected in GitHub UI" src="./screenshots/deploy-btn.png" alt="Deploy Button Injected in GitHub UI" width="75%" style="margin: 0 auto;">
+  <figcaption><i>Deploy Button Injected in GitHub UI</i></figcaption>
+</figure>
 
-![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn-dropdown.png)
 
-![Deploy Button Injected in GitHub UI](./screenshots/deploy-btn-dropdown-commit.png)
+<figure>
+  <img title="Deploy Button Dropdown with environments" src="./screenshots/deploy-btn-dropdown.png" alt="Deploy Button Dropdown with environments" width="50%" style="margin: 0 auto;">
+  <figcaption><i>Deploy Button Dropdown with environments</i></figcaption>
+</figure>
 
-![Deploy Button Injected in GitHub UI](./screenshots/env-config-popup.png)
+
+<figure>
+  <img title="Environment settings popup" src="./screenshots/env-config-popup.png" alt="Environment settings popup" width="50%" style="margin: 0 auto;">
+  <figcaption><i>Environment settings popup</i></figcaption>
+</figure>
 
 
 # Steps to use the extension
@@ -51,9 +60,10 @@ _Screenshots:_
 3. Open a new chrome tab with the following URL: <chrome://extensions/>
 4. Enable developer mode and click **LOAD UNPACKED**
 
-  ![Screenshot from documentation](https://developer.chrome.com/static/images/get_started/load_extension.png "Screenshot from documentation")
-  
-  [Chrome documentation and image source](https://developer.chrome.com/extensions/getstarted#manifest)
+<figure>
+  <img title="Screenshot from documentation" src="https://developer.chrome.com/static/images/get_started/load_extension.png" alt="Screenshot from documentation" width="50%" style="margin: 0 auto;">
+  <figcaption><i><a href="https://developer.chrome.com/extensions/getstarted#manifest">Chrome documentation & image source</a></i></figcaption>
+</figure>
 
 5. Select the `dist/` folder
 6. Open GitHub.com page and navigate to your repository, click on the extension to see the popup working
