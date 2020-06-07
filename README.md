@@ -18,8 +18,6 @@ Deploy your code into the selected environment from your repository by a button 
 
 Configure your environments providing minimal information and trigger a github action which can deploy your code into different environments from a branch, tag or commit.
 
-_Screenshots:_
-
 <img title="Deploy Button injected in GitHub UI" src="./screenshots/deploy-btn.png"
 alt="Deploy Button injected in GitHub UI" width="75%" style="margin: 0 auto;">
 
@@ -43,7 +41,7 @@ alt="Environment settings popup" width="50%" style="margin: 0 auto;">
 5. Create a GitHub Action workflow to be triggered when pressing the deploy button. [See sample here](./.github/workflows/sample.yml)
 6. Press the deploy button, and see how the action triggers automatically.
 
-### How to run locally
+# How to run locally
 
 1. Clone this repository and install dependencies using `npm install` inside the cloned folder
 2. Run the local development server using `npm start` _(watch mode enabled)_
@@ -60,11 +58,11 @@ alt="Environment settings popup" width="50%" style="margin: 0 auto;">
 
 Note: Keep in mind when developing locally, `background.ts` and `contentScript.ts` are being updated dynamically. However, sometimes you might need to manually update the extension content from the Chrome extension's page.
 
-###  Getting started with chrome extension development
+##  Getting started with chrome extension development
 
 [This post](https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575) guides you through the process of getting started with Chrome Extensions Development. I based my template from the code in [this repository](https://github.com/just-jeb/angular-chrome-extension)
 
-### Contributions [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ialex90/easy-deploy/issues)
+## Contributions [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ialex90/easy-deploy-extension/issues)
 
 You are welcome to contribute to this project.
 All suggestions/fixes/help are more than welcome. Add your feedback to [this todo list](https://github.com/ialex90/easy-deploy-extension/issues/1) for feature requests
