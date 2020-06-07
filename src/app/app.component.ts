@@ -4,8 +4,8 @@ import { FormControl, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Settings, Environment } from './interfaces';
-import { DEFAULT_ENVIROMENT } from './constants';
+import { DEFAULT_ENVIROMENT } from '@constants';
+import { Settings, Environment } from '@interfaces';
 
 @Component({
   selector: 'app-root',
