@@ -50,10 +50,10 @@ alt="Environment settings popup" width="50%" style="margin: 0 auto;">
 3. Open a new chrome tab with the following URL: <chrome://extensions/>
 4. Enable developer mode and click **LOAD UNPACKED**
 
-<figure>
-  <img title="Load unpacked extension" src="./screenshots/load-extension.png" alt="Load unpacked extension" width="50%" style="margin: 0 auto;">
-  <figcaption><i><a href="https://developer.chrome.com/extensions/getstarted#manifest">Chrome documentation & image source</a></i></figcaption>
-</figure>
+<a href="https://developer.chrome.com/extensions/getstarted#manifest">
+  <img title="Load unpacked extension" src="./screenshots/load-extension.png" 
+  alt="Load unpacked extension" width="50%" style="margin: 0 auto;">
+</a>
 
 5. Select the `dist/` folder
 6. Open GitHub.com page and navigate to your repository, click on the extension to see the popup working.
