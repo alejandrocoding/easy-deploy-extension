@@ -1,35 +1,35 @@
-# name: CI - Sample
-# on: repository_dispatch
+name: CI - Sample
+on: repository_dispatch
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout by SHA
-#         uses: actions/checkout@v2
-#         with:
-#           ###: easy-deploy chrome extension send sha within client_payload
-#           ref: ${{ github.event.client_payload.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout by SHA
+        uses: actions/checkout@v2
+        with:
+          ###: easy-deploy chrome extension send sha within client_payload
+          ref: ${{ github.event.client_payload.sha }}
 
-#       - name: Install dependencies
-#         run: npm ci
+      # - name: Install dependencies
+      #   run: npm ci
 
-#       - name: Run tests
-#         run: npm run test
+      # - name: Run tests
+      #   run: npm run test
 
-#       - name: Create build
-#         run: npm run build
+      # - name: Create build
+      #   run: npm run build
 
-#       - name: Deploy to DEV
-#         ###: easy-deploy chrome extension send event_type within client_payload
-#         if: github.event.client_payload.event_type == 'deploy-dev'
-#         ###: <script to deploy your project>
-#         run: echo 'Deploying DEV... Well done!'
+      # - name: Deploy to DEV
+      #   ###: easy-deploy chrome extension send event_type within client_payload
+      #   if: github.event.client_payload.event_type == 'deploy-dev'
+      #   ###: <script to deploy your project>
+      #   run: echo 'Deploying DEV... Well done!'
 
-#       - name: Deploy to QA
-#         if: github.event.client_payload.event_type == 'deploy-qa'
-#         run: echo 'Deploying QA... Well done!'
+      # - name: Deploy to QA
+      #   if: github.event.client_payload.event_type == 'deploy-qa'
+      #   run: echo 'Deploying QA... Well done!'
 
-#       - name: Deploy to PROD
-#         if: github.event.client_payload.event_type == 'deploy-prod'
-#         run: echo 'Deploying PRODUCTION... Well done!'
+      # - name: Deploy to PROD
+      #   if: github.event.client_payload.event_type == 'deploy-prod'
+      #   run: echo 'Deploying PRODUCTION... Well done!'
