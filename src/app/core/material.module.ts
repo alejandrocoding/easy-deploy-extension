@@ -7,13 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-
 
 @NgModule({
     imports: [
@@ -23,11 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        MatSnackBarModule,
-        MatTooltipModule,
-        MatSlideToggleModule,
         MatDividerModule,
-        MatProgressBarModule,
         MatTabsModule,
     ],
     exports: [
@@ -37,11 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        MatSnackBarModule,
-        MatTooltipModule,
-        MatSlideToggleModule,
         MatDividerModule,
-        MatProgressBarModule,
         MatTabsModule,
     ],
 })
