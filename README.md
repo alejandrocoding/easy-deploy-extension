@@ -14,9 +14,9 @@
 
 This is a chrome extension that allows you to manually trigger a GitHub Action.
 
-Deploy your code into the selected environment from your repository by a button rigth from the GitHub UI.
+Deploy your code into the selected environment from your repository by a button straight from the GitHub UI.
 
-Configure your environments providing minimal information and trigger a github action which can deploy your code into different environments. From a branch, tag or commit.
+Configure your environments providing minimal information and trigger a github action which can deploy your code into different environments from a branch, tag or commit.
 
 _Screenshots:_
 
@@ -28,7 +28,7 @@ _Screenshots:_
 
 <figure>
   <img title="Deploy Button Dropdown with environments" src="./screenshots/deploy-btn-dropdown.png" alt="Deploy Button Dropdown with environments" width="50%" style="margin: 0 auto;">
-  <figcaption><i>Deploy Button Dropdown with environments</i></figcaption>
+  <figcaption><i>Deploy dropdown button with environments</i></figcaption>
 </figure>
 
 
@@ -40,14 +40,14 @@ _Screenshots:_
 
 # Steps to use the extension
 
-1. Download from store (TODO: Insert link here)
-2. Go to some GitHub page since the popup only shows up under github domain
+1. Download from Chrome web store (TODO: Insert link here)
+2. Go to some GitHub page since the popup only shows up under github domain.
 3. Click on the extension to see a popup. Add the desired environments (Name, Description, Owner/Repo, Event Type, Token):
-    - Name: Name displayed in the dropdown of the "Deploy" button
-    - Description: Short information shown below the name in the dropdown of the "Deploy" button
-    - Owner/Repo: Owner of the repository followed by the repository name
+    - Name: Name displayed in the dropdown of the "Deploy" button.
+    - Description: Short information shown below the name in the dropdown of the "Deploy" button.
+    - Owner/Repo: Owner of the repository followed by the repository name.
     - Event Type: This value can be taken in the GitHub action to differentiate between environments: _${{ github.event.client_payload.event_type }}_
-    - Token: Personal token needed to dispatch actions on repositories. [Create one here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) - it requires permission for repo (the one which groups a few, first in the list)
+    - Token: Personal token needed to dispatch actions on repositories. [Create one here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) - it requires permission for repo (the one which groups a few, first in the list).
 4. You might need to refresh the tab after changing values in the popup. You now will see the deploy button in the configured repository.
 5. Create a GitHub Action to trigger when pressing the deploy button. (TODO: Example will be provided here soon).
 6. Press the deploy button, and see how the action triggers automatically.
@@ -66,7 +66,7 @@ _Screenshots:_
 </figure>
 
 5. Select the `dist/` folder
-6. Open GitHub.com page and navigate to your repository, click on the extension to see the popup working
+6. Open GitHub.com page and navigate to your repository, click on the extension to see the popup working.
 
 Note: Keep in mind when developing locally, `background.ts` and `contentScript.ts` are being updated dynamically. However, sometimes you might need to manually update the extension content from the Chrome extension's page.
 
@@ -81,4 +81,4 @@ Note: Keep in mind when developing locally, `background.ts` and `contentScript.t
 You are welcome to contribute to this project.
 All suggestions/fixes/help are more than welcome. Add your feedback to [this todo list](https://github.com/ialex90/easy-deploy-extension/issues/1) for feature requests
 
-Please contact me ([@alora90](https://twitter.com/alora90)) if you need some help getting started with the setup
+Please contact me ([@alora90](https://twitter.com/alora90)) if you need some help getting started with the setup.
