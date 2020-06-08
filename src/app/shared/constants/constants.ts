@@ -1,5 +1,5 @@
-import { Environment } from './interfaces';
-import { newGUID } from './helper';
+import { Environment } from '../interfaces/environment.interface';
+import { newGUID } from '../helpers/guid.helper';
 
 export const DEFAULT_ENVIROMENT: Environment = {
     id: newGUID(),
