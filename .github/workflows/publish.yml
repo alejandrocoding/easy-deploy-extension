@@ -25,10 +25,10 @@ jobs:
       - name: Publish
         uses: trmcnvn/chrome-addon@v2
         with:
-        extension: legogknlfnllbmijpohabichmkmhcefh
-        zip: dist/app.zip
-        client-id: ${{ secrets.CHROME_STORE_CLIENT_ID }}
-        client-secret: ${{ secrets.CHROME_STORE_SECRET }}
-        refresh-token: ${{ secrets.CHROME_STORE_REFRESH_TOKEN }}
-        # optionally specify the visibility of the addon
-        # publishTarget: default
+          extension: legogknlfnllbmijpohabichmkmhcefh
+          zip: dist/app.zip
+          client-id: ${{ secrets.CHROME_STORE_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_STORE_SECRET }}
+          refresh-token: ${{ secrets.CHROME_STORE_REFRESH_TOKEN }}
+          # optionally specify the visibility of the addon
+          # publishTarget: default
