@@ -9,6 +9,7 @@ export class DomHelper {
     private settings: Settings;
 
     private deployBtn: HTMLElement;
+    private environmentsButtonList: HTMLDivElement;
 
     async initDeployButton() {
         if (!URLHelper.isDeployableURL() || !this.getContainer()) {
@@ -17,12 +18,16 @@ export class DomHelper {
 
         try {
             this.settings = await getSettingsStorage();
+
+            const container = this.getContainer();
+            const deployBtn = this.createDeployButton();
+            container.parentNode.insertBefore(deployBtn, container.nextSibling);
+
+            this.subscribeToStorageChanges();
+
             if (this.settings && this.isMatchingOwnerAndRepo()) {
-
-                const container = this.getContainer();
-                const deployBtn = this.createDeployButton();
-
-                container.parentNode.insertBefore(deployBtn, container.nextSibling);
+                this.showDisplayBtn();
+                this.refreshEnvironmentButtonList();
             }
         } catch { }
     }
@@ -50,11 +55,23 @@ export class DomHelper {
         }
     }
 
+    private showDisplayBtn() {
+        if (this.deployBtn) {
+            this.deployBtn.style.display = 'block';
+        }
+    }
+
+    private hideDisplayBtn() {
+        if (this.deployBtn) {
+            this.deployBtn.style.display = 'none';
+        }
+    }
 
     private createDeployButton() {
         const deployBtn = document.createElement('details');
         deployBtn.classList.add('deploy-btn', 'details-reset', 'details-overlay', 'select-menu', 'float-left');
         this.deployBtn = deployBtn;
+        this.hideDisplayBtn();
 
         const dropDownBtn = this.createDropDownBtn();
         const selectMenuBox = this.createSelectMenuPopupBoxComponent();
@@ -101,13 +118,30 @@ export class DomHelper {
     private createSelectMenuPopupListButtons() {
         const itemList = document.createElement('div');
         itemList.classList.add('select-menu-list');
-
-        for (const env of this.settings.environments) {
-            const btn = this.createEnvironmentBtn(env.name, env.description);
-            btn.setAttribute('id', env.id);
-            itemList.appendChild(btn);
-        }
+        this.environmentsButtonList = itemList;
         return itemList;
+    }
+
+    private removeAllEnvironmentButtons() {
+        if (this.environmentsButtonList) {
+            this.showDisplayBtn();
+            while (this.environmentsButtonList.firstChild) {
+                this.environmentsButtonList.removeChild(this.environmentsButtonList.lastChild);
+            }
+        }
+    }
+
+    private refreshEnvironmentButtonList() {
+        this.removeAllEnvironmentButtons();
+        if (!this.settings.environments.length || !this.isMatchingOwnerAndRepo()) {
+            return;
+        }
+        for (const environment of this.settings.environments) {
+            const btn = this.createEnvironmentBtn(environment.name, environment.description);
+            btn.setAttribute('id', environment.id);
+            this.environmentsButtonList.appendChild(btn);
+        }
+        this.showDisplayBtn();
     }
 
     private createEnvironmentBtn(envName: string, envDescription?: string) {
@@ -124,7 +158,6 @@ export class DomHelper {
         const description = document.createElement('span');
         description.classList.add('description');
         description.innerText = envDescription;
-
 
         innerBox.appendChild(title);
         if (envDescription) {
@@ -149,5 +182,14 @@ export class DomHelper {
         await sleep(1000); // Needed as the action doesn't render on the github action page right away
         const urlRedirection = `https://github.com/${environment.repoOwner}/${environment.repoName}/actions`;
         chrome.runtime.sendMessage({ redirect_actions: urlRedirection });
+    }
+
+    private subscribeToStorageChanges() {
+        chrome.storage.onChanged.addListener(changes => {
+            if (changes.settings?.newValue) {
+                this.settings = changes.settings.newValue;
+                this.refreshEnvironmentButtonList();
+            }
+        });
     }
 }
