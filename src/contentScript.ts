@@ -4,6 +4,6 @@ import { DomHelper } from '@helpers';
 (async () => {
 
     const domHelper = new DomHelper();
-    domHelper.addDeployBtn();
+    await domHelper.initDeployButton();
 
 })();

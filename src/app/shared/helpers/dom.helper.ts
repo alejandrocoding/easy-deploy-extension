@@ -1,39 +1,47 @@
 import { Settings } from '../interfaces/settings.interface';
-import { sleep } from './async.helper';
+
+import { URLHelper } from './url.helper';
 import { GitHubHelper } from './github.helper';
+import { sleep, getSettingsStorage } from './async.helper';
 
 export class DomHelper {
 
-    private deployBtn: HTMLElement;
     private settings: Settings;
 
-    addDeployBtn() {
-        if (!this.isContainerPresent()) {
+    private deployBtn: HTMLElement;
+
+    async initDeployButton() {
+        if (!URLHelper.isDeployableURL() || !this.getContainer()) {
             return false;
         }
 
         try {
-            chrome.storage.sync.get(['settings'], (data: { settings }) => {
-                if (data?.settings?.environments?.length) {
-                    this.settings = data.settings;
-                    if (!this.isCurrentRepoOwner(this.settings)) {
-                        return false;
-                    }
-                    const container = this.getContainer();
-                    const deployBtn = this.createDeployButton();
+            this.settings = await getSettingsStorage();
+            if (this.settings && this.isMatchingOwnerAndRepo()) {
 
-                    container.parentNode.insertBefore(deployBtn, container.nextSibling);
-                }
-            });
+                const container = this.getContainer();
+                const deployBtn = this.createDeployButton();
+
+                container.parentNode.insertBefore(deployBtn, container.nextSibling);
+            }
         } catch { }
     }
 
-    isContainerPresent() {
-        return Boolean(this.getContainer());
+    private getContainer() {
+        return document.querySelector('#branch-select-menu') as HTMLElement;
     }
 
-    isCurrentRepoOwner(settings: Settings) {
-        return settings.environments.some(env => env.repo.length && location.pathname.includes(env.repo));
+    private getSHARef() {
+        if (URLHelper.isDeployableURL() && this.getContainer()) {
+            const anchor: HTMLAnchorElement = document.querySelector('.commit-tease-sha');
+            return anchor.href.split('/commit/')[1];
+        }
+    }
+
+    private isMatchingOwnerAndRepo() {
+        return this.settings.environments.some(env =>
+            env.repoOwner === URLHelper.getOwner() && env.repoName === URLHelper.getRepositoryName()
+        );
     }
 
     private closeDropDown() {
@@ -42,9 +50,6 @@ export class DomHelper {
         }
     }
 
-    private getContainer() {
-        return document.querySelector('#branch-select-menu') as HTMLElement;
-    }
 
     private createDeployButton() {
         const deployBtn = document.createElement('details');
@@ -73,7 +78,7 @@ export class DomHelper {
         selectMenu.style.zIndex = '99';
 
         const title = this.createSelectMenuPopupTitle();
-        const buttons = this.createSelectMenuPopupListBtns();
+        const buttons = this.createSelectMenuPopupListButtons();
 
         selectMenu.appendChild(title);
         selectMenu.appendChild(buttons);
@@ -93,19 +98,19 @@ export class DomHelper {
         return titleBox;
     }
 
-    private createSelectMenuPopupListBtns() {
+    private createSelectMenuPopupListButtons() {
         const itemList = document.createElement('div');
         itemList.classList.add('select-menu-list');
 
         for (const env of this.settings.environments) {
-            const btn = this.createEnvBtn(env.name, env.description);
+            const btn = this.createEnvironmentBtn(env.name, env.description);
             btn.setAttribute('id', env.id);
             itemList.appendChild(btn);
         }
         return itemList;
     }
 
-    private createEnvBtn(envName: string, envDescription?: string) {
+    private createEnvironmentBtn(envName: string, envDescription?: string) {
         const button = document.createElement('button');
         button.classList.add('select-menu-item', 'width-full');
 
@@ -128,18 +133,21 @@ export class DomHelper {
 
         button.appendChild(innerBox);
 
-        button.addEventListener('click', async () => {
-            this.closeDropDown();
-
-            const environment = this.settings.environments.find(env => env.id === button.id);
-            const sha = (document.querySelector('.commit-tease-sha') as HTMLAnchorElement).href.split('/commit/')[1];
-
-            const gitHubHelper = new GitHubHelper(this.settings.token, environment.repo);
-            await gitHubHelper.actionDispatch(sha, environment.event);
-
-            await sleep(1000); // Needed as the action doesn't render on the github action page right away
-            chrome.runtime.sendMessage({ redirect_actions: `https://github.com/${environment.repo}/actions` });
-        });
+        button.addEventListener('click', () => this.onEnvironmentButtonClick(button));
         return button;
+    }
+
+    private async onEnvironmentButtonClick(button: HTMLButtonElement) {
+        this.closeDropDown();
+
+        const environment = this.settings.environments.find((env) => env.id === button.id);
+        const sha = this.getSHARef();
+
+        const gitHubHelper = new GitHubHelper(this.settings.token, environment.repoOwner, environment.repoName);
+        await gitHubHelper.actionDispatch(sha, environment.event);
+
+        await sleep(1000); // Needed as the action doesn't render on the github action page right away
+        const urlRedirection = `https://github.com/${environment.repoOwner}/${environment.repoName}/actions`;
+        chrome.runtime.sendMessage({ redirect_actions: urlRedirection });
     }
 }

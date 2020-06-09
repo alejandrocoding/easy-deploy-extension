@@ -4,8 +4,9 @@ import { FormControl, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DEFAULT_ENVIROMENT } from '@constants';
-import { Settings, Environment } from '@interfaces';
+import { Environment } from '@interfaces';
+import { getSettingsStorage, setSettingsStorage } from '@helpers';
+import { DEFAULT_ENVIRONMENT } from '@constants';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.form.controls.selected as FormControl;
   }
 
-  get envs() {
+  get environments() {
     return this.form.controls.environments as FormArray;
   }
 
@@ -50,40 +51,38 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.form.controls.token as FormControl;
   }
 
-  private addEnviromentToForm(env: Environment, emitEvent = true) {
+  private addEnvironmentToForm(env: Environment, emitEvent = true) {
     const control = this.fb.group({
       id: env.id,
       name: env.name,
       description: env.description,
-      repo: env.repo,
-      event: env.event
+      event: env.event,
+      repoOwner: env.repoOwner,
+      repoName: env.repoName,
     });
-    this.envs.push(control);
-    this.selected.setValue(this.envs.controls.length - 1, { emitEvent });
+    this.environments.push(control);
+    this.selected.setValue(this.environments.controls.length - 1, { emitEvent });
   }
 
   addEnv() {
-    this.addEnviromentToForm(DEFAULT_ENVIROMENT);
+    this.addEnvironmentToForm(DEFAULT_ENVIRONMENT);
   }
 
   removeEnv(index: number) {
-    this.envs.removeAt(index);
+    this.environments.removeAt(index);
   }
 
-  private recover() {
-    chrome.storage.sync.get(['settings'], (data: { settings: Settings }) => {
-      if (data?.settings?.environments?.length) {
-        for (const env of data.settings.environments) {
-          this.addEnviromentToForm(env, false);
-        }
-        this.form.setValue(data.settings, { emitEvent: false });
-      } else {
-        this.addEnviromentToForm(DEFAULT_ENVIROMENT, false);
-      }
-    });
+  private async recover() {
+    const settings = await getSettingsStorage();
+    if (!settings) {
+      this.addEnvironmentToForm(DEFAULT_ENVIRONMENT, false);
+      return;
+    }
+    settings.environments.forEach(environment => this.addEnvironmentToForm(environment, false));
+    this.form.setValue(settings, { emitEvent: false });
   }
 
   private save() {
-    chrome.storage.sync.set({ settings: this.form.value });
+    setSettingsStorage(this.form.value);
   }
 }
