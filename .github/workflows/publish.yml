@@ -27,8 +27,8 @@ jobs:
         with:
           extension: legogknlfnllbmijpohabichmkmhcefh
           zip: dist/app.zip
-          client-id: ${{ secrets.CHROME_STORE_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_STORE_SECRET }}
-          refresh-token: ${{ secrets.CHROME_STORE_REFRESH_TOKEN }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
           # optionally specify the visibility of the addon
           # publishTarget: default
