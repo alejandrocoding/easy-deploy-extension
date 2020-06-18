@@ -1,5 +1,9 @@
 name: CI - Publish in Chrome Store
-on: repository_dispatch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -30,5 +34,3 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-          # optionally specify the visibility of the addon
-          # publishTarget: default
