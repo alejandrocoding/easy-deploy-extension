@@ -8,8 +8,12 @@ export class URLHelper {
     }
 
     static isDeployableURL() {
-        return location.pathname
-            .split(`/${this.getOwner()}/${this.getRepositoryName()}/tree/`)
-            .filter((e) => e).length === 1;
+        const urlTreeSplit = location.pathname.split(`/tree/`);
+        const isTreeCommitURL =
+            urlTreeSplit[0] === `/${this.getOwner()}/${this.getRepositoryName()}` &&
+            urlTreeSplit[1].indexOf('/') === -1;
+        const isHomePageURL = location.pathname === `/${this.getOwner()}/${this.getRepositoryName()}/`;
+
+        return isTreeCommitURL || isHomePageURL;
     }
 }

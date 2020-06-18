@@ -26,7 +26,7 @@ export class DomHelper {
 
             this.subscribeToStorageChanges();
 
-            if (this.settings && this.isMatchingOwnerAndRepo()) {
+            if (this.settings && this.isMatchingOwnerAndRepo() && URLHelper.isDeployableURL()) {
                 this.showDisplayBtn();
                 this.refreshEnvironmentButtonList();
             }
@@ -189,7 +189,10 @@ export class DomHelper {
         chrome.storage.onChanged.addListener(changes => {
             if (changes.settings?.newValue) {
                 this.settings = changes.settings.newValue;
-                this.refreshEnvironmentButtonList();
+                if (this.settings && this.isMatchingOwnerAndRepo() && URLHelper.isDeployableURL()) {
+                    this.showDisplayBtn();
+                    this.refreshEnvironmentButtonList();
+                }
             }
         });
     }
