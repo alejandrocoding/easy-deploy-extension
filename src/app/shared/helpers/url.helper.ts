@@ -11,8 +11,8 @@ export class URLHelper {
         const urlTreeSplit = location.pathname.split(`/tree/`);
         const isTreeCommitURL =
             urlTreeSplit[0] === `/${this.getOwner()}/${this.getRepositoryName()}` &&
-            urlTreeSplit[1].indexOf('/') === -1;
-        const isHomePageURL = location.pathname === `/${this.getOwner()}/${this.getRepositoryName()}/`;
+            urlTreeSplit[1]?.indexOf('/') === -1;
+        const isHomePageURL = location.pathname.replace(/\/+$/, '') === `/${this.getOwner()}/${this.getRepositoryName()}`;
 
         return isTreeCommitURL || isHomePageURL;
     }

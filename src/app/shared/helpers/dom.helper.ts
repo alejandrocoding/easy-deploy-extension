@@ -134,7 +134,7 @@ export class DomHelper {
 
     private refreshEnvironmentButtonList() {
         this.removeAllEnvironmentButtons();
-        if (!this.settings.environments.length || !this.isMatchingOwnerAndRepo()) {
+        if (!this.settings.environments.length || !this.isMatchingOwnerAndRepo() || !URLHelper.isDeployableURL()) {
             return;
         }
         for (const environment of this.settings.environments) {
@@ -189,10 +189,7 @@ export class DomHelper {
         chrome.storage.onChanged.addListener(changes => {
             if (changes.settings?.newValue) {
                 this.settings = changes.settings.newValue;
-                if (this.settings && this.isMatchingOwnerAndRepo() && URLHelper.isDeployableURL()) {
-                    this.showDisplayBtn();
-                    this.refreshEnvironmentButtonList();
-                }
+                this.refreshEnvironmentButtonList();
             }
         });
     }
