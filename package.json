@@ -1,7 +1,7 @@
 {
   "name": "easy-deploy",
   "description": "Easy Deploy is a chrome extension that allows you to manually trigger a GitHub Action ",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "email": "alejandrofpo@gmail.com",
     "name": "Alejandro Lora"

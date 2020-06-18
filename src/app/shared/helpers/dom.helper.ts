@@ -1,4 +1,5 @@
 import { Settings } from '../interfaces/settings.interface';
+import { Environment } from '../interfaces/environment.interface';
 
 import { URLHelper } from './url.helper';
 import { GitHubHelper } from './github.helper';
@@ -25,7 +26,7 @@ export class DomHelper {
 
             this.subscribeToStorageChanges();
 
-            if (this.settings && this.isMatchingOwnerAndRepo()) {
+            if (this.settings && this.isMatchingOwnerAndRepo() && URLHelper.isDeployableURL()) {
                 this.showDisplayBtn();
                 this.refreshEnvironmentButtonList();
             }
@@ -36,9 +37,9 @@ export class DomHelper {
         return document.querySelector('#branch-select-menu') as HTMLElement;
     }
 
-    private getSHARef() {
+    private getSHARef(environment: Environment) {
         if (URLHelper.isDeployableURL() && this.getContainer()) {
-            const anchor: HTMLAnchorElement = document.querySelector('.commit-tease-sha');
+            const anchor: HTMLAnchorElement = document.querySelector(`.Box-header a[href^="/${environment.repoOwner}/${environment.repoName}/commit/"]`);
             return anchor.href.split('/commit/')[1];
         }
     }
@@ -84,7 +85,7 @@ export class DomHelper {
 
     private createDropDownBtn() {
         const dropDownBtn = document.createElement('summary');
-        dropDownBtn.classList.add('select-menu-button', 'btn', 'btn-sm', 'btn-primary', 'ml-2');
+        dropDownBtn.classList.add('select-menu-button', 'btn', 'btn-primary', 'ml-2');
         dropDownBtn.innerHTML = '<span> Deploy </span>';
         return dropDownBtn;
     }
@@ -124,7 +125,7 @@ export class DomHelper {
 
     private removeAllEnvironmentButtons() {
         if (this.environmentsButtonList) {
-            this.showDisplayBtn();
+            this.hideDisplayBtn();
             while (this.environmentsButtonList.firstChild) {
                 this.environmentsButtonList.removeChild(this.environmentsButtonList.lastChild);
             }
@@ -133,7 +134,7 @@ export class DomHelper {
 
     private refreshEnvironmentButtonList() {
         this.removeAllEnvironmentButtons();
-        if (!this.settings.environments.length || !this.isMatchingOwnerAndRepo()) {
+        if (!this.settings.environments.length || !this.isMatchingOwnerAndRepo() || !URLHelper.isDeployableURL()) {
             return;
         }
         for (const environment of this.settings.environments) {
@@ -174,7 +175,7 @@ export class DomHelper {
         this.closeDropDown();
 
         const environment = this.settings.environments.find((env) => env.id === button.id);
-        const sha = this.getSHARef();
+        const sha = this.getSHARef(environment);
 
         const gitHubHelper = new GitHubHelper(this.settings.token, environment.repoOwner, environment.repoName);
         await gitHubHelper.actionDispatch(sha, environment.event);
