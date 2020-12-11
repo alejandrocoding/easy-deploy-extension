@@ -6,7 +6,7 @@
     <mat-icon>add</mat-icon>
 </button>
 
-<form [formGroup]="form" class="wrapper">
+<form [formGroup]="form" class="wrapper" (keydown.enter)="$event.preventDefault()">
     <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
         <mat-tab *ngFor="let env of environments.controls; index as i" [formGroup]="env" [label]="env.value.name">
             <div fxLayout="row wrap" fxLayoutAlign="space-between" class="tab-content">
