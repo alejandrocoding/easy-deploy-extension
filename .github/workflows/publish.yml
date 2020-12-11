@@ -25,7 +25,7 @@ jobs:
 
 
       - name: Publish
-        uses: Passiverecords/chrome-extension-upload-action@1.4.1
+        uses: Passiverecords/chrome-extension-upload-action@1.4.0
         with:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.SECRET }}
