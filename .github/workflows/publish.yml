@@ -25,10 +25,11 @@ jobs:
 
 
       - name: Publish
-        uses: trmcnvn/chrome-addon@v2
+        uses: Klemensas/chrome-extension-upload-action@1.4.1
         with:
-          extension: legogknlfnllbmijpohabichmkmhcefh
-          zip: dist/app.zip
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          file-name: './dist/app.zip'
+          app-id: 'legogknlfnllbmijpohabichmkmhcefh'
+          publish: true
