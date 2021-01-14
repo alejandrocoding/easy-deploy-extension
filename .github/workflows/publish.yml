@@ -23,12 +23,12 @@ jobs:
         with:
           args: zip -qq -r ./dist/app.zip ./dist
 
+
       - name: Publish
-        uses: Passiverecords/chrome-extension-upload-action@1.4.0
+        uses: trmcnvn/chrome-addon@v2
         with:
+          extension: legogknlfnllbmijpohabichmkmhcefh
+          zip: dist/app.zip
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-          file-name: './dist/app.zip'
-          app-id: 'legogknlfnllbmijpohabichmkmhcefh'
-          publish: true
