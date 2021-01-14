@@ -1,6 +1,6 @@
 import { Settings } from '../interfaces/settings.interface';
 
-export const sleep = (ms: number) => new Promise((cb: () => void) => setTimeout(cb, ms));
+export const sleep = (ms: number) => new Promise((cb => setTimeout(cb, ms)));
 
 export const getSettingsStorage = (): Promise<Settings | null> => {
     return new Promise((resolve) => {
