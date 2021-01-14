@@ -1,6 +1,6 @@
 {
   "name": "Easy Deploy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Allows you to manually trigger a GitHub Action",
   "manifest_version": 2,
   "icons": {
