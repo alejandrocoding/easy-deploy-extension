@@ -23,7 +23,6 @@ jobs:
         with:
           args: zip -qq -r ./dist/app.zip ./dist
 
-
       - name: Publish
         uses: Passiverecords/chrome-extension-upload-action@1.4.0
         with:
